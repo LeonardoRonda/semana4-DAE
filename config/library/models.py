@@ -62,7 +62,7 @@ class Publisher(models.Model):
 class Publication(models.Model):
     """Through model for Book-Publisher relationship with custom attributes."""
     libro = models.ForeignKey('Book', on_delete=models.CASCADE, related_name='publications')
-    editorial = models.ForeignKey(Publisher, on_delete=models.CASCADE, related_name='publications')
+    editorial = models.ForeignKey(Publisher, on_delete=models.PROTECT, related_name='publications')
     fecha_publicacion = models.DateField()
     edicion = models.CharField(max_length=50, blank=True)
 
