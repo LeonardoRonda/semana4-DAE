@@ -1,3 +1,4 @@
+from django.db.models.deletion import ProtectedError
 from django.test import TestCase, Client
 from datetime import date
 from .models import Author, AuthorProfile, Book, Category, Publisher, Publication
@@ -164,6 +165,14 @@ class ORMQueryTest(TestCase):
         books = category.books.all()
         self.assertIn(Book.objects.get(titulo="100 Years of Solitude"), books)
 
+    def test_book_to_categories_query(self):
+        """Forward query: Book -> Categories via ManyToManyField."""
+        book = Book.objects.get(titulo="100 Years of Solitude")
+        cats = book.categorias.all()
+        self.assertEqual(cats.count(), 2)
+        self.assertIn(self.category1, cats)
+        self.assertIn(self.category2, cats)
+
     def test_through_model_query(self):
         """Query through model from Book side."""
         book = Book.objects.get(titulo="100 Years of Solitude")
@@ -243,6 +252,5 @@ class OnDeleteProtectTest(TestCase):
             fecha_publicacion=date(2020, 1, 1),
             edicion="First"
         )
-        from django.db import IntegrityError
-        with self.assertRaises(Exception):
+        with self.assertRaises(ProtectedError):
             publisher.delete()
