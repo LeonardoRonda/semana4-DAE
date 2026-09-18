@@ -65,6 +65,14 @@ semana4-DAE/
 
 Consulta el diagrama ER y las observaciones del modelo en [docs/diagrama-modelos.md](docs/diagrama-modelos.md).
 
+## Diagrama de modelos
+
+El siguiente diagrama representa las relaciones entre los modelos implementados:
+
+![Diagrama de modelos](docs/modelo-relacional.png)
+
+Documentación y fuente Mermaid editable en [docs/modelo-relacional.md](docs/modelo-relacional.md).
+
 ## 7. Consultas ORM
 
 Los resultados de las consultas ejecutadas en la shell de Django (ida, vuelta y filtros con doble guion bajo) están documentados en [ORM_QUERIES.txt](ORM_QUERIES.txt).
